@@ -14,11 +14,12 @@ interface NavLink {
 
 const navLinks: NavLink[] = [
   { href: '#home', label: 'Home' },
-  { href: '#mission', label: 'Our Mission' }, // Added mission link to make Services make more sense in order
-  { href: '#services', label: 'Services' }, // Added services link
+  { href: '#mission', label: 'Our Mission' },
+  { href: '#services', label: 'Services' },
   { href: '#events', label: 'Events' },
   { href: '#about', label: 'About Us' },
   { href: '#gallery', label: 'Gallery' },
+  { href: '#team', label: 'Team' }, // Added team link
   { href: '#contact', label: 'Contact Us' },
 ];
 

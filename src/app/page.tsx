@@ -4,7 +4,8 @@ import React, { useState } from 'react';
 import Navbar from '@/components/layout/navbar';
 import HeroSection from '@/components/sections/hero-section';
 import MissionStatement from '@/components/sections/mission-statement';
-import ServicesSection from '@/components/sections/services-section'; // Added import
+import ServicesSection from '@/components/sections/services-section';
+import TeamSection from '@/components/sections/team-section'; // Added import
 import Footer from '@/components/layout/footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Image from 'next/image';
@@ -133,10 +134,11 @@ export default function HomePage() {
       <Navbar />
       <HeroSection />
       <MissionStatement />
-      <ServicesSection /> {/* Added new section */}
+      <ServicesSection />
       <EventsSection />
       <AboutUsSection />
       <GallerySection />
+      <TeamSection /> {/* Added new section */}
       <ContactUsSection />
       <Footer />
     </main>

@@ -4,7 +4,7 @@
 import React, { useState, useEffect, type FC } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Menu, Sparkles } from 'lucide-react'; // X is no longer needed from here as Sheet handles close
+import { Menu, Sparkles } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
 
@@ -18,8 +18,8 @@ const navLinks: NavLink[] = [
   { href: '/#mission', label: 'Our Mission' },
   { href: '/#services', label: 'Services' },
   { href: '/#events', label: 'Events' },
+  { href: '/#gallery', label: 'Gallery' },
   { href: '/#about', label: 'About Us' },
-  { href: '/gallery', label: 'Gallery' },
   { href: '/#team', label: 'Team' },
   { href: '/#contact', label: 'Contact Us' },
 ];
@@ -63,8 +63,6 @@ const Navbar: FC = () => {
                 href={link.href}
                 className="relative font-medium text-foreground transition-colors hover:text-primary group text-base"
                 onClick={() => handleNavClick(link.href)}
-                target={link.href === '/gallery' ? '_blank' : undefined}
-                rel={link.href === '/gallery' ? 'noopener noreferrer' : undefined}
               >
                 {link.label}
                 <span className="absolute bottom-[-2px] left-0 w-full h-[2px] bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
@@ -90,8 +88,6 @@ const Navbar: FC = () => {
                       href={link.href}
                       className="block font-medium text-foreground hover:text-primary py-2 text-lg"
                       onClick={() => handleNavClick(link.href)}
-                      target={link.href === '/gallery' ? '_blank' : undefined}
-                      rel={link.href === '/gallery' ? 'noopener noreferrer' : undefined}
                     >
                       {link.label}
                     </Link>

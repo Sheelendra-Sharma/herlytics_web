@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Navbar from '@/components/layout/navbar';
 import HeroSection from '@/components/sections/hero-section';
 import MissionStatement from '@/components/sections/mission-statement';
+import ServicesSection from '@/components/sections/services-section'; // Added import
 import Footer from '@/components/layout/footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Image from 'next/image';
@@ -22,7 +23,7 @@ import {
 // Placeholder sections
 const EventsSection = () => (
   <section id="events" className="py-16 md:py-24 bg-secondary/30">
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <div className="container mx-auto px-6 sm:px-8 lg:px-12 text-center">
       <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-12">Upcoming Events</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {[1, 2, 3].map((i) => (
@@ -45,7 +46,7 @@ const EventsSection = () => (
 
 const AboutUsSection = () => (
  <section id="about" className="py-16 md:py-24 bg-background">
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="container mx-auto px-6 sm:px-8 lg:px-12">
       <div className="flex flex-col md:flex-row-reverse items-center gap-10 md:gap-16">
         <div className="md:w-1/2 space-y-6 text-center md:text-left">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground">
@@ -79,7 +80,7 @@ const AboutUsSection = () => (
 
 const GallerySection = () => (
   <section id="gallery" className="py-16 md:py-24 bg-secondary/30">
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <div className="container mx-auto px-6 sm:px-8 lg:px-12 text-center">
       <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-12">Gallery</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {[...Array(8)].map((_, i) => (
@@ -97,7 +98,7 @@ const ContactUsSection = () => {
 
   return (
     <section id="contact" className="py-16 md:py-24 bg-background">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="container mx-auto px-6 sm:px-8 lg:px-12 text-center">
         <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">Get In Touch</h2>
         <p className="text-lg text-muted-foreground mb-10 max-w-2xl mx-auto">
           Have questions or want to get involved? We'd love to hear from you!
@@ -132,6 +133,7 @@ export default function HomePage() {
       <Navbar />
       <HeroSection />
       <MissionStatement />
+      <ServicesSection /> {/* Added new section */}
       <EventsSection />
       <AboutUsSection />
       <GallerySection />

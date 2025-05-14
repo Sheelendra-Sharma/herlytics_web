@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState, useEffect, type FC } from 'react';
@@ -13,6 +14,8 @@ interface NavLink {
 
 const navLinks: NavLink[] = [
   { href: '#home', label: 'Home' },
+  { href: '#mission', label: 'Our Mission' }, // Added mission link to make Services make more sense in order
+  { href: '#services', label: 'Services' }, // Added services link
   { href: '#events', label: 'Events' },
   { href: '#about', label: 'About Us' },
   { href: '#gallery', label: 'Gallery' },
@@ -42,7 +45,7 @@ const Navbar: FC = () => {
         isScrolled ? 'bg-background/90 shadow-lg backdrop-blur-sm py-3' : 'bg-transparent py-5'
       )}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-6 sm:px-8 lg:px-12">
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center space-x-2 text-2xl font-bold text-primary">
             <Sparkles className="h-7 w-7" />
@@ -77,7 +80,7 @@ const Navbar: FC = () => {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 bg-background shadow-lg pb-4">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col space-y-4 pt-4">
+          <div className="container mx-auto px-6 sm:px-8 lg:px-12 flex flex-col space-y-4 pt-4">
             {navLinks.map((link) => (
               <Link
                 key={link.label}

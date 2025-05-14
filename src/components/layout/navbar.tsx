@@ -13,14 +13,14 @@ interface NavLink {
 }
 
 const navLinks: NavLink[] = [
-  { href: '#home', label: 'Home' },
-  { href: '#mission', label: 'Our Mission' },
-  { href: '#services', label: 'Services' },
-  { href: '#events', label: 'Events' },
-  { href: '#about', label: 'About Us' },
-  { href: '#gallery', label: 'Gallery' },
-  { href: '#team', label: 'Team' }, // Added team link
-  { href: '#contact', label: 'Contact Us' },
+  { href: '/', label: 'Home' },
+  { href: '/#mission', label: 'Our Mission' },
+  { href: '/#services', label: 'Services' },
+  { href: '/#events', label: 'Events' },
+  { href: '/#about', label: 'About Us' },
+  { href: '/gallery', label: 'Gallery' }, // Updated href
+  { href: '/#team', label: 'Team' },
+  { href: '/#contact', label: 'Contact Us' },
 ];
 
 const Navbar: FC = () => {
@@ -38,6 +38,17 @@ const Navbar: FC = () => {
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+  
+  // Ensure home link always goes to the top of the home page.
+  // Other section links on the homepage should also correctly scroll.
+  const handleNavClick = (href: string) => {
+    setIsMobileMenuOpen(false);
+    if (href.startsWith('/#') || href === '/') {
+      // For homepage links, ensure full page reload or scroll to section
+      // Next.js Link component handles this well for client-side navigation.
+    }
+  };
+
 
   return (
     <nav
@@ -59,7 +70,7 @@ const Navbar: FC = () => {
                 key={link.label}
                 href={link.href}
                 className="relative font-medium text-foreground transition-colors hover:text-primary group text-base"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={() => handleNavClick(link.href)}
               >
                 {link.label}
                 <span className="absolute bottom-[-2px] left-0 w-full h-[2px] bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
@@ -87,7 +98,7 @@ const Navbar: FC = () => {
                 key={link.label}
                 href={link.href}
                 className="block font-medium text-foreground hover:text-primary py-2"
-                onClick={toggleMobileMenu}
+                onClick={() => handleNavClick(link.href)}
               >
                 {link.label}
               </Link>

@@ -1,11 +1,11 @@
 
-"use client"; 
+"use client";
 import React, { useState } from 'react';
 import Navbar from '@/components/layout/navbar';
 import HeroSection from '@/components/sections/hero-section';
 import MissionStatement from '@/components/sections/mission-statement';
 import ServicesSection from '@/components/sections/services-section';
-import TeamSection from '@/components/sections/team-section'; // Added import
+import TeamSection from '@/components/sections/team-section';
 import Footer from '@/components/layout/footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Image from 'next/image';
@@ -79,21 +79,6 @@ const AboutUsSection = () => (
   </section>
 );
 
-const GallerySection = () => (
-  <section id="gallery" className="py-16 md:py-24 bg-secondary/30">
-    <div className="container mx-auto px-6 sm:px-8 lg:px-12 text-center">
-      <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-12">Gallery</h2>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {[...Array(8)].map((_, i) => (
-          <div key={i} className="overflow-hidden rounded-lg shadow-md aspect-square transform transition-all hover:scale-105">
-            <Image src={`https://placehold.co/400x400.png`} alt={`Gallery image ${i + 1}`} width={400} height={400} className="w-full h-full object-cover" data-ai-hint="event photos community" />
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-);
-
 const ContactUsSection = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
 
@@ -137,8 +122,7 @@ export default function HomePage() {
       <ServicesSection />
       <EventsSection />
       <AboutUsSection />
-      <GallerySection />
-      <TeamSection /> {/* Added new section */}
+      <TeamSection />
       <ContactUsSection />
       <Footer />
     </main>

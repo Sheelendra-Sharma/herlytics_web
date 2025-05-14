@@ -1,3 +1,6 @@
+
+"use client"; 
+import React, { useState } from 'react';
 import Navbar from '@/components/layout/navbar';
 import HeroSection from '@/components/sections/hero-section';
 import MissionStatement from '@/components/sections/mission-statement';
@@ -5,6 +8,16 @@ import Footer from '@/components/layout/footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
+import ContactFormComponent from '@/components/forms/contact-form';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
 
 // Placeholder sections
 const EventsSection = () => (
@@ -79,19 +92,38 @@ const GallerySection = () => (
   </section>
 );
 
-const ContactUsSection = () => (
-  <section id="contact" className="py-16 md:py-24 bg-background">
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">Get In Touch</h2>
-      <p className="text-lg text-muted-foreground mb-10 max-w-2xl mx-auto">
-        Have questions or want to get involved? We'd love to hear from you!
-      </p>
-      <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-10 py-4 text-lg">
-        Contact Us
-      </Button>
-    </div>
-  </section>
-);
+const ContactUsSection = () => {
+  const [isFormOpen, setIsFormOpen] = useState(false);
+
+  return (
+    <section id="contact" className="py-16 md:py-24 bg-background">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">Get In Touch</h2>
+        <p className="text-lg text-muted-foreground mb-10 max-w-2xl mx-auto">
+          Have questions or want to get involved? We'd love to hear from you!
+        </p>
+        <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
+          <DialogTrigger asChild>
+            <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-10 py-4 text-lg">
+              Contact Us
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[480px] p-0">
+            <DialogHeader className="p-6 pb-4">
+              <DialogTitle className="text-2xl">Contact Us</DialogTitle>
+              <DialogDescription>
+                Fill out the form below and we'll get back to you as soon as possible.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="px-6 pb-6">
+             <ContactFormComponent onFormSubmit={() => setIsFormOpen(false)} />
+            </div>
+          </DialogContent>
+        </Dialog>
+      </div>
+    </section>
+  );
+};
 
 
 export default function HomePage() {

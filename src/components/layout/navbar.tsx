@@ -4,7 +4,8 @@
 import React, { useState, useEffect, type FC } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Menu, X, Sparkles } from 'lucide-react';
+import { Menu, Sparkles } from 'lucide-react'; // X is no longer needed from here as Sheet handles close
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
 
 interface NavLink {
@@ -18,7 +19,7 @@ const navLinks: NavLink[] = [
   { href: '/#services', label: 'Services' },
   { href: '/#events', label: 'Events' },
   { href: '/#about', label: 'About Us' },
-  { href: '/gallery', label: 'Gallery' }, // Updated href
+  { href: '/gallery', label: 'Gallery' },
   { href: '/#team', label: 'Team' },
   { href: '/#contact', label: 'Contact Us' },
 ];
@@ -34,19 +35,10 @@ const Navbar: FC = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
   
-  // Ensure home link always goes to the top of the home page.
-  // Other section links on the homepage should also correctly scroll.
   const handleNavClick = (href: string) => {
-    setIsMobileMenuOpen(false);
-    if (href.startsWith('/#') || href === '/') {
-      // For homepage links, ensure full page reload or scroll to section
-      // Next.js Link component handles this well for client-side navigation.
-    }
+    setIsMobileMenuOpen(false); // Close mobile menu on navigation
+    // Smooth scroll for hash links is handled by browser / Next.js Link
   };
 
 
@@ -71,6 +63,8 @@ const Navbar: FC = () => {
                 href={link.href}
                 className="relative font-medium text-foreground transition-colors hover:text-primary group text-base"
                 onClick={() => handleNavClick(link.href)}
+                target={link.href === '/gallery' ? '_blank' : undefined}
+                rel={link.href === '/gallery' ? 'noopener noreferrer' : undefined}
               >
                 {link.label}
                 <span className="absolute bottom-[-2px] left-0 w-full h-[2px] bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
@@ -82,33 +76,35 @@ const Navbar: FC = () => {
           </div>
 
           <div className="md:hidden">
-            <Button variant="ghost" size="icon" onClick={toggleMobileMenu}>
-              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </Button>
+            <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Menu className="h-6 w-6" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left" className="w-[280px] sm:w-[320px] pt-12 px-6 bg-background">
+                <div className="flex flex-col space-y-5">
+                  {navLinks.map((link) => (
+                    <Link
+                      key={link.label}
+                      href={link.href}
+                      className="block font-medium text-foreground hover:text-primary py-2 text-lg"
+                      onClick={() => handleNavClick(link.href)}
+                      target={link.href === '/gallery' ? '_blank' : undefined}
+                      rel={link.href === '/gallery' ? 'noopener noreferrer' : undefined}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                  <Button variant="outline" className="w-full mt-5" asChild>
+                     <Link href="/login" onClick={() => setIsMobileMenuOpen(false)}>Login/Register</Link>
+                  </Button>
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
       </div>
-
-      {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-background shadow-lg pb-4">
-          <div className="container mx-auto px-6 sm:px-8 lg:px-12 flex flex-col space-y-4 pt-4">
-            {navLinks.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className="block font-medium text-foreground hover:text-primary py-2"
-                onClick={() => handleNavClick(link.href)}
-              >
-                {link.label}
-              </Link>
-            ))}
-            <Button variant="outline" className="w-full" asChild>
-               <Link href="/login">Login/Register</Link>
-            </Button>
-          </div>
-        </div>
-      )}
     </nav>
   );
 };

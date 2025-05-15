@@ -1,6 +1,5 @@
 "use client";
 import Image from 'next/image';
-
 import React, { useState, useEffect, type FC } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -8,15 +7,7 @@ import { Menu } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
 
-import Logo from '@/app/gallery/logo.png';
 
-const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/#services', label: 'Services' },
-  { href: '/#gallery', label: 'Gallery' },
-  { href: '/#about', label: 'About Us' },
-  { href: '/#team', label: 'Team' },
-];
 
 const Navbar: FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -30,7 +21,7 @@ const Navbar: FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = (href: string) => {
+  const handleNavClick = () => {
     setIsMobileMenuOpen(false);
   };
 
@@ -46,7 +37,7 @@ const Navbar: FC = () => {
           <Link href="/" className="flex items-center space-x-2 text-2xl font-bold text-primary">
             <div className="logo-container">
               <Image
-                src={Logo}
+                src= '/logo.png'
                 alt="Logo"
                 width={40}
                 height={40}
@@ -57,17 +48,54 @@ const Navbar: FC = () => {
           </Link>
 
           <div className="hidden md:flex items-center space-x-6">
-            {navLinks.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className="relative font-medium text-white transition-colors hover:text-primary group text-base"
-                onClick={() => handleNavClick(link.href)}
-              >
-                {link.label}
-                <span className="absolute bottom-[-2px] left-0 w-full h-[2px] bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
-              </Link>
-            ))}
+            <Link
+              href="/"
+              className="relative font-medium text-white transition-colors hover:text-primary group text-base"
+              onClick={handleNavClick}
+            >
+              Home
+              <span className="absolute bottom-[-2px] left-0 w-full h-[2px] bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+            </Link>
+            <Link
+              href="/#services"
+              className="relative font-medium text-white transition-colors hover:text-primary group text-base"
+              onClick={handleNavClick}
+            >
+              Services
+              <span className="absolute bottom-[-2px] left-0 w-full h-[2px] bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+            </Link>
+            <Link
+              href="/resouces"
+              className="relative font-medium text-white transition-colors hover:text-primary group text-base"
+              onClick={handleNavClick}
+            >
+              Resources
+              <span className="absolute bottom-[-2px] left-0 w-full h-[2px] bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+            </Link>
+            <Link
+              href="/gallery"
+              className="relative font-medium text-white transition-colors hover:text-primary group text-base"
+              onClick={handleNavClick}
+            >
+              Gallery
+              <span className="absolute bottom-[-2px] left-0 w-full h-[2px] bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+            </Link>
+            <Link
+              href="/#about"
+              className="relative font-medium text-white transition-colors hover:text-primary group text-base"
+              onClick={handleNavClick}
+            >
+              About Us
+              <span className="absolute bottom-[-2px] left-0 w-full h-[2px] bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+            </Link>
+            <Link
+              href="/#team"
+              className="relative font-medium text-white transition-colors hover:text-primary group text-base"
+              onClick={handleNavClick}
+            >
+              Team
+              <span className="absolute bottom-[-2px] left-0 w-full h-[2px] bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+            </Link>
             <Button variant="outline" size="sm" asChild>
               <Link href="/login">Login/Register</Link>
             </Button>
@@ -82,18 +110,43 @@ const Navbar: FC = () => {
               </SheetTrigger>
               <SheetContent side="left" className="w-[280px] sm:w-[320px] pt-12 px-6 bg-background">
                 <div className="flex flex-col space-y-5">
-                  {navLinks.map((link) => (
-                    <Link
-                      key={link.label}
-                      href={link.href}
-                      className="block font-medium text-foreground hover:text-primary py-2 text-lg"
-                      onClick={() => handleNavClick(link.href)}
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
+                  <Link
+                    href="/"
+                    className="block font-medium text-foreground hover:text-primary py-2 text-lg"
+                    onClick={handleNavClick}
+                  >
+                    Home
+                  </Link>
+                  <Link
+                    href="/#services"
+                    className="block font-medium text-foreground hover:text-primary py-2 text-lg"
+                    onClick={handleNavClick}
+                  >
+                    Services
+                  </Link>
+                  <Link
+                    href="/gallery"
+                    className="block font-medium text-foreground hover:text-primary py-2 text-lg"
+                    onClick={handleNavClick}
+                  >
+                    Gallery
+                  </Link>
+                  <Link
+                    href="/#about"
+                    className="block font-medium text-foreground hover:text-primary py-2 text-lg"
+                    onClick={handleNavClick}
+                  >
+                    About Us
+                  </Link>
+                  <Link
+                    href="/#team"
+                    className="block font-medium text-foreground hover:text-primary py-2 text-lg"
+                    onClick={handleNavClick}
+                  >
+                    Team
+                  </Link>
                   <Button variant="outline" className="w-full mt-5" asChild>
-                    <Link href="/login" onClick={() => setIsMobileMenuOpen(false)}>Login/Register</Link>
+                    <Link href="/login" onClick={handleNavClick}>Login/Register</Link>
                   </Button>
                 </div>
               </SheetContent>

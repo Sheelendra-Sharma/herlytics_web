@@ -1,27 +1,21 @@
-
 "use client";
+import Image from 'next/image';
 
 import React, { useState, useEffect, type FC } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Menu, Sparkles } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
 
-interface NavLink {
-  href: string;
-  label: string;
-}
+import Logo from '@/app/gallery/logo.png';
 
-const navLinks: NavLink[] = [
+const navLinks = [
   { href: '/', label: 'Home' },
-  { href: '/#mission', label: 'Our Mission' },
   { href: '/#services', label: 'Services' },
-  { href: '/#events', label: 'Events' },
   { href: '/#gallery', label: 'Gallery' },
   { href: '/#about', label: 'About Us' },
   { href: '/#team', label: 'Team' },
-  { href: '/#contact', label: 'Contact Us' },
 ];
 
 const Navbar: FC = () => {
@@ -35,24 +29,30 @@ const Navbar: FC = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-  
-  const handleNavClick = (href: string) => {
-    setIsMobileMenuOpen(false); // Close mobile menu on navigation
-    // Smooth scroll for hash links is handled by browser / Next.js Link
-  };
 
+  const handleNavClick = (href: string) => {
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <nav
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out',
-        isScrolled ? 'bg-background/90 shadow-lg backdrop-blur-sm py-3' : 'bg-transparent py-5'
+        isScrolled ? 'bg-gray-300 shadow-lg backdrop-blur-sm py-3' : 'bg-transparent py-5'
       )}
     >
       <div className="container mx-auto px-6 sm:px-8 lg:px-12">
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center space-x-2 text-2xl font-bold text-primary">
-            <Sparkles className="h-7 w-7" />
+            <div className="logo-container">
+              <Image
+                src={Logo}
+                alt="Logo"
+                width={40}
+                height={40}
+                className="logo-image"
+              />
+            </div>
             <span>HERlytics</span>
           </Link>
 
@@ -61,7 +61,7 @@ const Navbar: FC = () => {
               <Link
                 key={link.label}
                 href={link.href}
-                className="relative font-medium text-foreground transition-colors hover:text-primary group text-base"
+                className="relative font-medium text-white transition-colors hover:text-primary group text-base"
                 onClick={() => handleNavClick(link.href)}
               >
                 {link.label}
@@ -93,7 +93,7 @@ const Navbar: FC = () => {
                     </Link>
                   ))}
                   <Button variant="outline" className="w-full mt-5" asChild>
-                     <Link href="/login" onClick={() => setIsMobileMenuOpen(false)}>Login/Register</Link>
+                    <Link href="/login" onClick={() => setIsMobileMenuOpen(false)}>Login/Register</Link>
                   </Button>
                 </div>
               </SheetContent>

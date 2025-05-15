@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, type FC } from 'react';
 import Image from 'next/image';
+import mainImg from '@/app/gallery/Main.jpg';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
@@ -17,7 +18,7 @@ const HeroSection: FC = () => {
   return (
     <section id="home" className="relative flex items-center justify-center min-h-screen bg-secondary text-secondary-foreground">
       <Image
-        src="https://placehold.co/1920x1080.png"
+        src={mainImg}
         alt="Empowered women"
         layout="fill"
         objectFit="cover"
@@ -49,7 +50,7 @@ const HeroSection: FC = () => {
           <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3 text-lg" asChild>
             <a href="#mission">Our Mission</a>
           </Button>
-          <Button variant="outline" size="lg" className="border-background text-background hover:bg-background hover:text-primary px-8 py-3 text-lg" asChild>
+          <Button variant="outline" size="lg" className="border-background text-black  hover:bg-background hover:text-primary px-8 py-3 text-lg" asChild>
              <a href="#contact">Join Us</a>
           </Button>
         </div>

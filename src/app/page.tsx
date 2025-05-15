@@ -142,7 +142,7 @@ export default function HomePage() {
       <HeroSection />
       <MissionStatement />
       <ServicesSection />
-      <EventsSection />
+      {/* <EventsSection /> */}
       <GallerySection /> {/* Added GallerySection back to homepage */}
       <AboutUsSection />
       <TeamSection />

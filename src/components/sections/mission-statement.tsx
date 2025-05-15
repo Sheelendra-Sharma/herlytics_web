@@ -1,5 +1,6 @@
 import React, { type FC } from 'react';
 import Image from 'next/image';
+import Mission from '@/app/gallery/Mission.jpeg';
 import { Card, CardContent } from '@/components/ui/card';
 
 const MissionStatement: FC = () => {
@@ -22,7 +23,7 @@ const MissionStatement: FC = () => {
             <Card className="overflow-hidden shadow-xl rounded-xl">
               <CardContent className="p-0">
                 <Image
-                  src="https://placehold.co/600x400.png"
+                  src={Mission}
                   alt="Diverse group collaborating"
                   width={600}
                   height={400}

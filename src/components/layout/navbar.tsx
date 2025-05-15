@@ -7,7 +7,7 @@ import { Menu } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
 
-import Logo from '@/app/gallery/logo.png';
+
 
 const Navbar: FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -37,7 +37,7 @@ const Navbar: FC = () => {
           <Link href="/" className="flex items-center space-x-2 text-2xl font-bold text-primary">
             <div className="logo-container">
               <Image
-                src={Logo}
+                src= '/logo.png'
                 alt="Logo"
                 width={40}
                 height={40}
@@ -62,6 +62,14 @@ const Navbar: FC = () => {
               onClick={handleNavClick}
             >
               Services
+              <span className="absolute bottom-[-2px] left-0 w-full h-[2px] bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+            </Link>
+            <Link
+              href="/resouces"
+              className="relative font-medium text-white transition-colors hover:text-primary group text-base"
+              onClick={handleNavClick}
+            >
+              Resources
               <span className="absolute bottom-[-2px] left-0 w-full h-[2px] bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
             </Link>
             <Link

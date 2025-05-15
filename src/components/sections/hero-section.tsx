@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, type FC } from 'react';
 import Image from 'next/image';
-import mainImg from '@/app/gallery/Main.jpg';
+// import mainImg from '@/app/gallery/Main.jpg';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
@@ -17,15 +17,14 @@ const HeroSection: FC = () => {
 
   return (
     <section id="home" className="relative flex items-center justify-center min-h-screen bg-secondary text-secondary-foreground">
-      <Image
-        src={mainImg}
-        alt="Empowered women"
-        layout="fill"
-        objectFit="cover"
-        className="opacity-30"
-        data-ai-hint="community women empowerment"
-        priority
-      />
+    <Image
+  src="/Main.jpg" // or your actual image path
+  alt="Empowered women"
+  fill
+  className="object-cover opacity-30"
+  data-ai-hint="community women empowerment"
+  priority
+/>
       <div className="absolute inset-0 bg-black/50"></div>
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center py-20">
         <div

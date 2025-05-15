@@ -143,7 +143,7 @@ export default function HomePage() {
       <MissionStatement />
       <ServicesSection />
       {/* <EventsSection /> */}
-      <GallerySection /> {/* Added GallerySection back to homepage */}
+      {/* <GallerySection /> */}
       <AboutUsSection />
       <TeamSection />
       <ContactUsSection />

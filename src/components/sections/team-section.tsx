@@ -23,9 +23,9 @@ interface TeamMember {
 const teamMembers: TeamMember[] = [
   {
     id: 1,
-    name: 'Alex Johnson',
-    role: 'Lead Data Scientist',
-    imageUrl: 'https://placehold.co/200x200.png',
+    name: 'Dr. Iram Naim',
+    role: 'Founder',
+    imageUrl: '/iram mam profile.jpg',
     socials: {
       linkedin: '#',
       twitter: '#',
@@ -35,9 +35,9 @@ const teamMembers: TeamMember[] = [
   },
   {
     id: 2,
-    name: 'Maria Garcia',
-    role: 'Analytics Manager',
-    imageUrl: 'https://placehold.co/200x200.png',
+    name: 'Aditya Nath Mishra',
+    role: 'Mentor',
+    imageUrl: '/Aditya Nath Mishra.jpg',
     socials: {
       linkedin: '#',
       twitter: '#',
@@ -47,9 +47,9 @@ const teamMembers: TeamMember[] = [
   },
   {
     id: 3,
-    name: 'Sam Lee',
-    role: 'Community Lead',
-    imageUrl: 'https://placehold.co/200x200.png',
+    name: 'Abhishek Kumar',
+    role: 'Coordinator',
+    imageUrl: '/Abhishek Kumar.jpg',
     socials: {
       linkedin: '#',
       twitter: '#',

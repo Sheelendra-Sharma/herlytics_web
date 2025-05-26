@@ -39,8 +39,8 @@ const collegeSections = {
   ],
   'K.P.R.C Kala Kendra Girls Inter College': [
     { src: '/K.P.R.C1.jpg', alt: 'College C Image 1' },
-    { src: '/K.P.R.2.jpg', alt: 'College C Image 2' },
-    { src: '/K.P.R.3.jpg', alt: 'College C Image 2' },
+    { src: '/K.P.R.C2.jpg', alt: 'College C Image 2' },
+    { src: '/K.P.R.C3.jpg', alt: 'College C Image 2' },
   ],
   'Shri Mahavir Prasad saxena girls inter College': [
     { src: '/Shri 1.jpg', alt: 'College C Image 1' },

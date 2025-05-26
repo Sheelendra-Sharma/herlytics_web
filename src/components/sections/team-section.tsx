@@ -1,67 +1,112 @@
-
 "use client";
 
-import type { FC } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Linkedin, Twitter, Instagram } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
+import Image from "next/image";
+import Link from "next/link";
+import { Linkedin, Twitter, Instagram } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
 
-interface TeamMember {
-  id: number;
-  name: string;
-  role: string;
-  imageUrl: string;
-  socials: {
-    linkedin: string;
-    twitter: string;
-    instagram: string;
-  };
-  aiHint: string;
-}
-
-const teamMembers: TeamMember[] = [
+const teamMembers = [
   {
     id: 1,
-    name: 'Dr. Iram Naim',
-    role: 'Founder',
-    imageUrl: '/iram mam profile.jpg',
+    name: "Dr. Iram Naim",
+    role: "Founder & CEO",
+    imageUrl: "/iram mam profile.jpg",
     socials: {
-      linkedin: '#',
-      twitter: '#',
-      instagram: '#',
+      linkedin: "#",
+      twitter: "#",
+      instagram: "#",
     },
-    aiHint: 'profile professional woman'
+    aiHint: "profile professional woman",
   },
   {
     id: 2,
-    name: 'Aditya Nath Mishra',
-    role: 'Mentor',
-    imageUrl: '/Aditya Nath Mishra.jpg',
+    name: "Dr. Pooja Yadav",
+    role: "Co-Founder",
+    imageUrl: "/pooja.png",
     socials: {
-      linkedin: '#',
-      twitter: '#',
-      instagram: '#',
+      linkedin: "#",
+      twitter: "#",
+      instagram: "#",
     },
-    aiHint: 'profile professional man'
+    aiHint: "profile professional man",
   },
   {
     id: 3,
-    name: 'Abhishek Kumar',
-    role: 'Coordinator',
-    imageUrl: '/Abhishek Kumar.jpg',
+    name: "Dr. Preeti Yadav",
+    role: "CTO",
+    imageUrl: "/preeti.jpg",
     socials: {
-      linkedin: '#',
-      twitter: '#',
-      instagram: '#',
+      linkedin: "#",
+      twitter: "#",
+      instagram: "#",
     },
-    aiHint: 'profile professional person'
+    aiHint: "profile professional developer",
+  },
+  {
+    id: 4,
+    name: "Dr. Pankaj Roy",
+    role: "Mentor",
+    imageUrl: "/Pankaj.png",
+    socials: {
+      linkedin: "#",
+      twitter: "#",
+      instagram: "#",
+    },
+    aiHint: "profile professional developer",
+  },
+  {
+    id: 5,
+    name: "Saurabh Maurya",
+    role: "Backend Developer , Lead Developer",
+    imageUrl: "/Saurabh profile.jpg",
+    socials: {
+      linkedin: "#",
+      twitter: "#",
+      instagram: "#",
+    },
+    aiHint: "profile backend developer",
+  },
+  {
+    id: 6,
+    name: "Prashant Yadav",
+    role: "Frontend Developer",
+    imageUrl: "/Prashant.jpg",
+    socials: {
+      linkedin: "#",
+      twitter: "#",
+      instagram: "#",
+    },
+    aiHint: "profile backend developer",
+  },
+  {
+    id: 7,
+    name: "Sheelendra Sharma",
+    role: "UI/UX Designer",
+    imageUrl: "/sheelendra.png",
+    socials: {
+      linkedin: "#",
+      twitter: "#",
+      instagram: "#",
+    },
+    aiHint: "profile ui ux designer",
+  },
+  {
+    id: 8,
+    name: "Arpit Gangwar",
+    role: "Developer",
+    imageUrl: "/arpit.png",
+    socials: {
+      linkedin: "#",
+      twitter: "#",
+      instagram: "#",
+    },
+    aiHint: "profile ui ux designer",
   },
 ];
 
-const TeamSection: FC = () => {
+export default function TeamPage() {
   return (
-    <section id="team" className="py-16 md:py-24 bg-secondary/30">
+    <section id="team" className="py-16 md:py-24 bg-secondary/30 min-h-screen">
       <div className="container mx-auto px-6 sm:px-8 lg:px-12 text-center">
         <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-12">
           Meet Our Team
@@ -90,13 +135,25 @@ const TeamSection: FC = () => {
                   {member.role}
                 </p>
                 <div className="flex justify-center space-x-4">
-                  <Link href={member.socials.linkedin} aria-label={`${member.name} LinkedIn`} className="text-muted-foreground hover:text-primary transition-colors duration-300">
+                  <Link
+                    href={member.socials.linkedin}
+                    aria-label={`${member.name} LinkedIn`}
+                    className="text-muted-foreground hover:text-primary transition-colors duration-300"
+                  >
                     <Linkedin className="h-5 w-5 md:h-6 md:w-6" />
                   </Link>
-                  <Link href={member.socials.twitter} aria-label={`${member.name} Twitter`} className="text-muted-foreground hover:text-primary transition-colors duration-300">
+                  <Link
+                    href={member.socials.twitter}
+                    aria-label={`${member.name} Twitter`}
+                    className="text-muted-foreground hover:text-primary transition-colors duration-300"
+                  >
                     <Twitter className="h-5 w-5 md:h-6 md:w-6" />
                   </Link>
-                  <Link href={member.socials.instagram} aria-label={`${member.name} Instagram`} className="text-muted-foreground hover:text-primary transition-colors duration-300">
+                  <Link
+                    href={member.socials.instagram}
+                    aria-label={`${member.name} Instagram`}
+                    className="text-muted-foreground hover:text-primary transition-colors duration-300"
+                  >
                     <Instagram className="h-5 w-5 md:h-6 md:w-6" />
                   </Link>
                 </div>
@@ -107,6 +164,4 @@ const TeamSection: FC = () => {
       </div>
     </section>
   );
-};
-
-export default TeamSection;
+}

@@ -18,7 +18,7 @@ const HeroSection: FC = () => {
   return (
     <section id="home" className="relative flex items-center justify-center min-h-screen bg-secondary text-secondary-foreground">
     <Image
-  src="/Main.jpg" // or your actual image path
+  src="/MJPRU_Adm_Block_03.jpg" // or your actual image path
   alt="Empowered women"
   fill
   className="object-cover opacity-30"
@@ -33,6 +33,9 @@ const HeroSection: FC = () => {
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
           )}
         >
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-background mb-6">
+            MJPRU
+          </h1>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-background mb-6">
             Empowering Women in Analytics
           </h1>

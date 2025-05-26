@@ -5,6 +5,7 @@ import Navbar from '@/components/layout/navbar';
 import HeroSection from '@/components/sections/hero-section';
 import MissionStatement from '@/components/sections/mission-statement';
 import ServicesSection from '@/components/sections/services-section';
+// import TeamSection from '@/components/sections/team-section';
 import TeamSection from '@/components/sections/team-section';
 import Footer from '@/components/layout/footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -86,7 +87,7 @@ const AboutUsSection = () => (
           <Card className="overflow-hidden shadow-xl rounded-xl">
             <CardContent className="p-0">
               <Image
-                src="https://placehold.co/600x400.png"
+                src="/Main.jpg"
                 alt="Team photo"
                 width={600}
                 height={400}

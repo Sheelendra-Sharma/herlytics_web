@@ -1,6 +1,7 @@
 
 "use client";
 
+import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -18,6 +19,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
 import { Phone, User, Mail, MessageSquare, Type } from 'lucide-react';
+import { useLanguage } from '@/contexts/language-context';
 
 const contactFormSchema = z.object({
   name: z.string().min(2, {
@@ -42,6 +44,9 @@ interface ContactFormComponentProps {
 }
 
 export default function ContactFormComponent({ onFormSubmit }: ContactFormComponentProps) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { t } = useLanguage();
+  
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
     defaultValues: {
@@ -54,15 +59,42 @@ export default function ContactFormComponent({ onFormSubmit }: ContactFormCompon
     mode: "onChange",
   });
 
-  function onSubmit(data: ContactFormValues) {
-    console.log("Contact Form Data:", data);
-    toast({
-      title: "Form Submitted!",
-      description: "We've received your message and will get back to you shortly.",
-    });
-    form.reset();
-    if (onFormSubmit) {
-      onFormSubmit();
+  async function onSubmit(data: ContactFormValues) {
+    setIsSubmitting(true);
+    
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to send message');
+      }
+
+      toast({
+        title: t('contact.form.success'),
+        description: result.message || t('contact.form.successDesc'),
+      });
+      
+      form.reset();
+      if (onFormSubmit) {
+        onFormSubmit();
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast({
+        title: t('contact.form.error'),
+        description: error instanceof Error ? error.message : t('contact.form.errorDesc'),
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
@@ -76,10 +108,10 @@ export default function ContactFormComponent({ onFormSubmit }: ContactFormCompon
             <FormItem>
               <FormLabel className="flex items-center">
                 <User className="mr-2 h-4 w-4 text-muted-foreground" />
-                Full Name
+                {t('contact.form.name')}
               </FormLabel>
               <FormControl>
-                <Input placeholder="Jane Doe" {...field} />
+                <Input placeholder="Sender Name" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -92,10 +124,10 @@ export default function ContactFormComponent({ onFormSubmit }: ContactFormCompon
             <FormItem>
               <FormLabel className="flex items-center">
                 <Mail className="mr-2 h-4 w-4 text-muted-foreground" />
-                Email Address
+                {t('contact.form.email')}
               </FormLabel>
               <FormControl>
-                <Input placeholder="jane.doe@example.com" {...field} />
+                <Input placeholder="sender@gmail.com" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -108,10 +140,10 @@ export default function ContactFormComponent({ onFormSubmit }: ContactFormCompon
             <FormItem>
               <FormLabel className="flex items-center">
                 <Phone className="mr-2 h-4 w-4 text-muted-foreground" />
-                Phone Number (Optional)
+                {t('contact.form.phone')}
               </FormLabel>
               <FormControl>
-                <Input placeholder="+1 (555) 123-4567" {...field} />
+                <Input placeholder="+91 1234567890" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -124,10 +156,10 @@ export default function ContactFormComponent({ onFormSubmit }: ContactFormCompon
             <FormItem>
               <FormLabel className="flex items-center">
                 <Type className="mr-2 h-4 w-4 text-muted-foreground" />
-                Subject (Optional)
+                {t('contact.form.subject')}
               </FormLabel>
               <FormControl>
-                <Input placeholder="Regarding event sponsorship" {...field} />
+                <Input placeholder="Regarding " {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -140,7 +172,7 @@ export default function ContactFormComponent({ onFormSubmit }: ContactFormCompon
             <FormItem>
               <FormLabel className="flex items-center">
                 <MessageSquare className="mr-2 h-4 w-4 text-muted-foreground" />
-                Message
+                {t('contact.form.message')}
               </FormLabel>
               <FormControl>
                 <Textarea
@@ -151,14 +183,18 @@ export default function ContactFormComponent({ onFormSubmit }: ContactFormCompon
                 />
               </FormControl>
               <FormDescription className="text-xs">
-                Briefly describe your inquiry. Max 500 characters.
+                {t('contact.form.messageDesc')}
               </FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
-          Send Message
+        <Button 
+          type="submit" 
+          className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? t('contact.form.sending') : t('contact.form.send')}
         </Button>
       </form>
     </Form>

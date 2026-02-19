@@ -12,6 +12,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import ContactFormComponent from '@/components/forms/contact-form';
+import AIChatbot from '@/components/chatbot/ai-chatbot';
 import {
   Dialog,
   DialogContent,
@@ -20,6 +21,14 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { HelpCircle } from 'lucide-react';
+import { useLanguage } from '@/contexts/language-context';
 
 
 // Placeholder sections
@@ -68,19 +77,21 @@ const GallerySection = () => (
   </section>
 );
 
-const AboutUsSection = () => (
+const AboutUsSection = () => {
+  const { t } = useLanguage();
+  return (
  <section id="about" className="py-16 md:py-24 bg-background">
     <div className="container mx-auto px-6 sm:px-8 lg:px-12">
       <div className="flex flex-col md:flex-row-reverse items-center gap-10 md:gap-16">
         <div className="md:w-1/2 space-y-6 text-center md:text-left">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-            About HERlytics
+            {t('about.title')}
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            Founded in 2020, HERlytics has grown into a vibrant community of women passionate about data and analytics. We believe in the power of diversity and inclusion to drive innovation.
+            {t('about.para1')}
           </p>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            Our team is composed of industry professionals, mentors, and volunteers dedicated to creating impactful programs and resources. We strive to support women at every stage of their careers, from students to seasoned experts.
+            {t('about.para2')}
           </p>
         </div>
         <div className="md:w-1/2">
@@ -100,29 +111,97 @@ const AboutUsSection = () => (
       </div>
     </div>
   </section>
-);
+  );
+};
+
+const QASection = () => {
+  const { t } = useLanguage();
+  const faqData = [
+    {
+      question: t('faq.q1'),
+      answer: t('faq.a1'),
+    },
+    {
+      question: t('faq.q2'),
+      answer: t('faq.a2'),
+    },
+    {
+      question: t('faq.q3'),
+      answer: t('faq.a3'),
+    },
+    {
+      question: t('faq.q4'),
+      answer: t('faq.a4'),
+    },
+    {
+      question: t('faq.q5'),
+      answer: t('faq.a5'),
+    },
+    {
+      question: t('faq.q6'),
+      answer: t('faq.a6'),
+    },
+  ];
+
+  return (
+    <section id="qa" className="py-16 md:py-24 bg-secondary/30">
+      <div className="container mx-auto px-6 sm:px-8 lg:px-12">
+        <div className="text-center mb-12">
+          <div className="flex items-center justify-center mb-4">
+            <HelpCircle className="h-12 w-12 text-primary" />
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            {t('faq.title')}
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            {t('faq.subtitle')}
+          </p>
+        </div>
+        <div className="max-w-3xl mx-auto">
+          <Accordion type="single" collapsible className="space-y-4">
+            {faqData.map((faq, index) => (
+              <AccordionItem
+                key={index}
+                value={`item-${index}`}
+                className="bg-background border border-border rounded-lg px-6 shadow-md hover:shadow-lg transition-shadow"
+              >
+                <AccordionTrigger className="text-left font-semibold text-foreground hover:no-underline py-4">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed pb-4">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </div>
+    </section>
+  );
+};
 
 const ContactUsSection = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const { t } = useLanguage();
 
   return (
     <section id="contact" className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-6 sm:px-8 lg:px-12 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">Get In Touch</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">{t('contact.title')}</h2>
         <p className="text-lg text-muted-foreground mb-10 max-w-2xl mx-auto">
-          Have questions or want to get involved? We'd love to hear from you!
+          {t('contact.subtitle')}
         </p>
         <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
           <DialogTrigger asChild>
             <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-10 py-4 text-lg">
-              Contact Us
+              {t('contact.btn')}
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[480px] p-0">
             <DialogHeader className="p-6 pb-4">
-              <DialogTitle className="text-2xl">Contact Us</DialogTitle>
+              <DialogTitle className="text-2xl">{t('contact.dialogTitle')}</DialogTitle>
               <DialogDescription>
-                Fill out the form below and we'll get back to you as soon as possible.
+                {t('contact.dialogDesc')}
               </DialogDescription>
             </DialogHeader>
             <div className="px-6 pb-6">
@@ -146,9 +225,11 @@ export default function HomePage() {
       {/* <EventsSection /> */}
       {/* <GallerySection /> */}
       <AboutUsSection />
-      <TeamSection />
+      {/* <TeamSection /> */}
+      <QASection />
       <ContactUsSection />
       <Footer />
+      <AIChatbot />
     </main>
   );
 }
